@@ -3,8 +3,17 @@ Template.incidentReport.helpers
     if @travelRelated
       return "fa-check"
     return "fa-times"
-  formatDate: (date) ->
-    return moment(date).format("MMM D, YYYY")
+  formatDate: ->
+    if @specificDate
+      startMoment = moment(@startDate)
+      endMoment = moment(@endDate)
+      diff = endMoment.diff(startMoment, "hours")
+      if diff is 1
+        return moment(@startDate).format("MMM D, YYYY h:mm A")
+      else
+        return moment(@startDate).format("MMM D, YYYY")
+    else
+      return " - "
 
 Template.addIncidentReport.events
   "click .open-incident-form": (event, template) ->
