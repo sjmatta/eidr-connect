@@ -68,3 +68,11 @@ if Meteor.isServer
 
         Incidents.update(incident._id, {$unset: {deaths: ""}})
         Incidents.insert(newIncident)
+
+    incidents = Incidents.find({date: {$exists: true}}).fetch()
+    for incident in incidents
+      Incidents.update(incident._id, {
+        startDate: incident.date
+        endDate: incident.date
+        unknownTimezone: true
+      })
