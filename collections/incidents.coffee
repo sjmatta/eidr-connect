@@ -78,10 +78,6 @@ if Meteor.isServer
           startDate: startDate.toDate()
           endDate: endDate.toDate()
           dateRangeType: "day"
-          hourPrecision: false
-          unknownTimezone: true
-          timezone: "EGST"
-          timezoneOffset: "+0000"
         },
         $unset: {
           date: ""

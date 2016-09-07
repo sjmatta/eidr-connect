@@ -4,21 +4,14 @@ Template.incidentReport.helpers
       return "fa-check"
     return "fa-times"
   formatDate: ->
-    timezoneString = ""
-    if @timezone
-      timezoneString = " " + @timezone + " " + @timezoneOffset
     dateFormat = "MMM D, YYYY"
-    if @hourPrecision
-      dateFormat = "MMM D, YYYY h:mm A"
     if @dateRangeType is "day"
-      return moment(@startDate).format(dateFormat) + timezoneString
-    else if @dateRangeType is "precise"
-      return moment(@startDate).format(dateFormat) + " - " + moment(@endDate).format(dateFormat) + timezoneString
-    else if @dateRangeType is "unbounded"
-      if @startDate
-        return "After " + moment(@startDate).format(dateFormat) + timezoneString
+      if @cumulative
+        return "Before " + moment(@endDate).format(dateFormat)
       else
-        return "Before " + moment(@endDate).format(dateFormat) + timezoneString
+        return moment(@startDate).format(dateFormat)
+    else if @dateRangeType is "precise"
+      return moment(@startDate).format(dateFormat) + " - " + moment(@endDate).format(dateFormat)
     return ""
 
 Template.addIncidentReport.events
